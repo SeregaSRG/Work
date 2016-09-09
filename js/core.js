@@ -3,6 +3,16 @@ var autocomplete = new google.maps.places.Autocomplete(document.getElementById('
     componentRestrictions: {country: 'ru'}
 });
 
+function whoById(id) {
+	switch (id){
+		case 1:
+			return "Маляр";
+		case 2:
+			return "Каменщик";
+		case 3:
+			return "Дизайнер";
+	}
+}
 function up(){
 	if ($('#password').val() !== $('#password_d').val()) {
 		$('#password_d').css('background-color', '#EAB7B7');
@@ -17,8 +27,11 @@ function toggleJobSelect() {
 	$('#main-card').toggle();
 	$('#job-card').toggle();
 }
-function selectJob_save() {
+function saveWorker() {
 	toggleJobSelect();
+	var job_id = $('input[type=radio][name=category]:checked').val();
+	$('#jober').val(whoById(Number(job_id)));
+	$('#who_label').addClass('is-dirty');
 }
 
 function toggleGeoSelect() {

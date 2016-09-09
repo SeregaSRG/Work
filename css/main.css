@@ -162,6 +162,10 @@ body {
 	cursor: pointer;
 }
 
+.list-radio {
+	display: inline;
+}
+
 #mapSurface {
 	width: calc(100% - 2px);
 	height: 55vh;

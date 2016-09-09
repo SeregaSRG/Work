@@ -116,7 +116,7 @@
 							</div>
 							<div class="mdl-card__supporting-text">
 								<div class="left-line">
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="who_label">
 										<label for="jober" class="mdl-textfield__label"><i class="material-icons">build</i>   Кто вам нужен?</label>
 										<input type="text" class="mdl-textfield__input" id="jober" onclick="toggleJobSelect();"/>
 									</div>
@@ -124,9 +124,9 @@
 										<label for="where" class="mdl-textfield__label"><i class="material-icons">location_on</i>   Где вам нужен?</label>
 										<input type="text" class="mdl-textfield__input" id="where" onclick="toggleGeoSelect();geo();"/>
 									</div>
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<label for="timer" class="mdl-textfield__label"><i class="material-icons">query_builder</i>   Когда вам нужен?</label>
-										<input type="text" class="mdl-textfield__input" id="timer" />
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label time-field">
+										<label for="output" class="mdl-textfield__label"><i class="material-icons">query_builder</i>   Когда вам нужен?</label>
+										<input type="text" class="mdl-textfield__input" id="output" />
 									</div>
 								</div>
 							</div>
@@ -174,6 +174,22 @@
 <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.blue_grey-blue.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 <link href="../css/main.css" rel="stylesheet"/>
+
+<link rel="stylesheet" href="../dist/css/datepicker.css">
+<script src="../dist/js/datepicker.standalone.js" charset="utf-8"></script>
+<script>
+
+    const picker = new MaterialDatePicker({})
+            .on('submit', (d) => {
+        output.val = d;
+    });
+
+    const el = document.querySelector('.time-field');
+    el.addEventListener('click', () => {
+        picker.open();
+    }, false);
+
+</script>
 <script>
 	$(window).load(function(){
 		checkLogin();
@@ -244,28 +260,45 @@
 <!-- Выбор рабочего -->
 <div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--4dp center full-card-height" id="job-card" style="display:none">
 	<div class="mdl-card__supporting-text">
-		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-1">
-			<input type="radio" id="op-1" class="mdl-radio__button"  name="category" value="1">
-			<span class="mdl-radio__label">Маляр</span>
-		</label>
-		<br>
-		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-2">
-			<input type="radio" id="op-2" class="mdl-radio__button" name="category" value="2">
-			<span class="mdl-radio__label">Каменщик</span>
-		</label>
-		<br>
-		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-3">
-			<input type="radio" id="op-3" class="mdl-radio__button" name="category" value="3">
-			<span class="mdl-radio__label">Кирпичи</span>
-		</label>
-		<br>
-		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-4">
-			<input type="radio" id="op-4" class="mdl-radio__button" name="category" value="4">
-			<span class="mdl-radio__label">Бетон</span>
-		</label>
+        <ul class="demo-list-control mdl-list">
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons  mdl-list__item-avatar">person</i>
+                    Маляр
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                      <label class="list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-1">
+                          <input type="radio" id="op-1" class="mdl-radio__button"  name="category" value="1">
+                      </label>
+                </label>
+                </span>
+            </li>
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons  mdl-list__item-avatar">person</i>
+                    Каменщик
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                    <label class="list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-2">
+                        <input type="radio" id="op-2" class="mdl-radio__button" name="category" value="2">
+                    </label>
+                </span>
+            </li>
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons  mdl-list__item-avatar">person</i>
+                    Дизайнер
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                    <label class="list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-3">
+                        <input type="radio" id="op-3" class="mdl-radio__button" name="category" value="3">
+                    </label>
+                </span>
+            </li>
+        </ul>
 	</div>
 	<div class="mdl-card__actions mdl-card--border">
-		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full-btn" onclick="selectJob_save()">Сохранить</button>
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full-btn" onclick="saveWorker()">Сохранить</button>
 		<button class="mdl-button mdl-js-button full-btn" onclick="toggleJobSelect()">Отменить</button>
 	</div>
 </div>
