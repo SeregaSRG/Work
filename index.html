@@ -1,0 +1,86 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=550, initial-scale=0.65">
+    <title>Easy Work - приложение для тех, кто строит</title>
+    <meta name="description" content="A">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="favicons/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="shortcut icon" href="favicons/favicon.ico">
+
+    <meta name="msapplication-TileColor" content="#603cba">
+    <meta name="msapplication-TileImage" content="favicons/mstile-144x144.png">
+
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="head">
+         <div class="menu">
+             <div><img src="img/headlogo.png"></img></div>
+            <div><a href="#how" onclick="return anchorScroller(this)">Как это работает</a></div>
+            <div><a href="#">Преимущества</a></div>
+            <div><a href="#">Начать пользоваться</a></div>
+        </div>
+    </div>
+
+    <div class="promo">
+        <h1>Сделать ремонт или построить дом в один клик?<br>С нами это возможно!</h1>
+        <img src="img/phone.png"></img>
+    </div>
+
+    <div class="who">
+        <div class="content">
+            <h1>Для кого этот сервис?</h1><br><br>
+            <ul class="arrow">
+                <li>
+                    <h2>Для обычных людей</h2>
+                    <p>Для тех, кто желает мгновенно решить любую проблему. Кто не хочет искать рабочих на avito, совершать сотни звонков</p>
+                </li>
+                <li>
+                    <h2>Для любых рабочих</h2>
+                    <p>Для тех, кто хочет увеличить количество продаж свох услуг и максимально улучшть удобство связи с клиентом</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="how" class="how" name="how">
+        <div class="content">
+            <h1>Как это работает?</h1><br>
+            <p>Мы предоставляем для бизнеса уникальную возможность дать персональное спецпредложение для человека, основываясь на его потребительском поведении. То, как человек тратит деньги — лучший показатель для персонализированного маркетинга.</p>
+            <p>Мы предоставляем для бизнеса уникальную возможность дать персональное спецпредложение для человека, основываясь на его потребительском поведении. То, как человек тратит деньги — лучший показатель для персонализированного маркетинга.</p>
+            <img src="img/HowItWorks.png"></img>
+        </div>
+    </div>
+    <script src="push.js" type="text/javascript"></script>
+    <script src="http://easywork.su/js/jquery-1.12.0.min.js"></script>
+    <script>
+        $(window).load(function(){
+            Push.create("Hello world!", {
+                body: "How's it hangin'?",
+                icon: 'icon.png',
+                timeout: 4000,
+                onClick: function () {
+                    window.focus();
+                    this.close();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

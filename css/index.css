@@ -1,0 +1,135 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900&subset=latin,cyrillic-ext);
+@font-face {
+    font-family: PF Highway Sans Pro; /* Имя шрифта */
+    src: url(../font/Highway.ttf); /* Путь к файлу со шрифтом */
+}
+body {
+    margin: 0;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background: url(../img/bg.jpg) repeat fixed;
+}
+.head {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    background-color: white;
+    top:0px;
+    z-index: 100;
+}
+.menu {
+    min-width: 60%;
+    height: 100%;
+    margin: auto auto auto auto;
+    display: table;
+    text-align: center;
+}
+.menu div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 10px 0 10px;
+}
+.menu a {
+    color: #6eb3d1;
+    text-decoration: none;
+    border-bottom: dotted 1px #6eb3d1;
+    font-weight: 900;
+    font-size: large;
+}
+.menu img {
+    height: 50px;
+    width: auto;
+}
+.promo {
+    position: relative;
+    height: 450px;
+    width: 100%;
+    margin-top: 100px;
+}
+.promo h1 {
+    display: inline-block;
+    position: relative;
+    left: 10%;
+    top: 10vw;
+    max-width: 80vw;
+    background-color: #FFF000;
+    padding: 5px;
+    z-index: 5;
+    margin:0px;
+}
+.promo img {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: auto;
+    height: 350px;
+}
+.who {
+     position: relative;
+     height: 400px;
+     background-color: white;
+}
+.content {
+    position: absolute;
+    height: 400px;
+    width: 80%;
+    margin: 50px 10vw 50px 10vw;
+}
+.content h1 {
+    display: inline-block;
+    position: relative;
+    max-width: 80vw;
+    background-color: #FFF000;
+    padding: 5px;
+    z-index: 5;
+    margin:0px;
+}
+.content h2 {
+    display: inline-block;
+    position: relative;
+    max-width: 80vw;
+    background-color: #80D0F2;
+    padding: 1px;
+    z-index: 5;
+    margin:0px;
+}
+.content p {
+    font-family: PF Highway Sans Pro;
+}
+@media screen and (min-width: 551px) {
+    .how .content p {
+        max-width: 49%;
+        display: inline-block;
+    }
+}
+@media screen and (max-width: 550px) {
+    .how .content p {
+        max-width: 100vw;
+    }
+}
+.content img {
+    width:  100%;
+}
+.how {
+    position: relative;
+    height: 550px;
+    background-color: whitesmoke;
+}
+@media screen and (min-width: 551px) {
+    .how .content p {
+        max-width: 49%;
+        display: inline-block;
+    }
+}
+@media screen and (max-width: 550px) {
+    .how .content p {
+        max-width: 100vw;
+    }
+}
+.arrow {
+    list-style-type: none;
+}
+.arrow li {
+    padding: 0 0 10px 35px;
+    background: url('https://target.tinkoff.ru/resources/images/arrow.png') no-repeat scroll left top;
+}

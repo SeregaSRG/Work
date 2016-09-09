@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<head>
+	<script type="text/javascript">
+		$(document).bind("mobileinit", function() {
+			$.support.cors = true;
+			$.mobile.allowCrossDomainPages = true;
+			$.mobile.pushStateEnabled      = false;
+		});
+	</script>
+	<title>Easy Work - для клиентов</title>
+ 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=360" />
+    <meta name="format-detection" content="telephone=no" /> 
+	<meta charset="utf-8">
+	<meta name="theme-color" content="#607D8B">
+
+    <script type="text/javascript" src="http://newalarm.pe.hu/js/bootstrap-material-datetimepicker.js"></script>
+	<script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+
+    <link rel="stylesheet" href="http://newalarm.pe.hu/css/bootstrap-material-datetimepicker.css" />
+
+    <!-- CHOSEN -->
+    <link rel="stylesheet" href="docsupport/style.css">
+    <link rel="stylesheet" href="docsupport/prism.css">
+    <link rel="stylesheet" href="docsupport/chosen.css">
+    <style type="text/css" media="all">
+        .chosen-container {
+            width: 100%!important;
+        }
+    </style>
+    <!-- CHOSEN -->
+
+</head>
+<body>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title" id="left-email">Easy work</span>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+		<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored add" onclick="logOut()">
+			<i class="large material-icons">power_settings_new</i>
+		</button>
+	  	<span class="mdl-layout-title">Easy Work</span>
+    	<nav class="mdl-navigation">
+      		<a class="mdl-navigation__link" onclick="$('#update_main').show()">Изменить данные</a>
+      		<a class="mdl-navigation__link" onclick="findHistory()">История сделок</a>
+		</nav>
+  </div>
+  <main class="mdl-layout__content">
+<div class="page-content">
+	<div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+<!-- Register -->
+<div id="reg-menu" style="display:none">
+	<div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--4dp center">
+		<div class="mdl-card__title">
+			<h1 class="mdl-card__title-text">Регистрация</h1>
+		</div>
+		<div class="mdl-card__supporting-text">
+			<form>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label for="user_name" class="mdl-textfield__label">Имя</label>
+					<input type="text" class="mdl-textfield__input" id="user_name" />
+				</div>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label for="user_surname" class="mdl-textfield__label">Фамилия</label>
+					<input type="text" class="mdl-textfield__input" id="user_surname" />
+				</div>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label for="user_phone" class="mdl-textfield__label">Телефон</label>
+					<input type="tel" class="mdl-textfield__input" id="user_phone" pattern="-?[0-9]*(\.[0-9]+)?"/>
+					<span class="mdl-textfield__error">Номер телефона должен содержать только цифры</span>
+				</div>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label for="user_email" class="mdl-textfield__label">Почта</label>
+					<input type="email" class="mdl-textfield__input" id="user_email" />
+				</div>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label for="user_password" class="mdl-textfield__label">Пароль</label>
+					<input type="password" class="mdl-textfield__input" id="user_password" />
+					<span class="mdl-textfield__error">Некорректный пароль</span>
+				</div>
+			</form>
+		</div>
+		<div class="mdl-card__actions mdl-card--border">
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored " onclick='sendUserRegister();'>Зарегистрироваться</button>
+			<button class="mdl-button mdl-js-button mdl-button--primary" onclick='$("#log-menu").toggle();$("#reg-menu").toggle();' style='float:right'>Уже зарегистрирован</button>
+		</div>
+		
+	</div>
+</div>	 
+<!-- Register -->
+	<!-- Login -->
+	<div id="log-menu" style="display:none">
+		<div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--4dp center">
+			<div class="mdl-card__title">
+				<h1 class="mdl-card__title-text">Вход - клиенту</h1>
+			</div>
+			<div class="mdl-card__supporting-text" id="info">
+				<form>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<label for="log_phone" class="mdl-textfield__label">Телефон</label>
+						<input type="tel" class="mdl-textfield__input" id="log_phone" pattern="-?[0-9]*(\.[0-9]+)?"/>
+						<span class="mdl-textfield__error">Номер телефона должен содержать только цифры</span>
+					</div>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<label for="log_password" class="mdl-textfield__label">Пароль</label>
+						<input type="password" class="mdl-textfield__input" id="log_password" />
+						<span class="mdl-textfield__error">Некорректный пароль</span>
+					</div>
+				</form>
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored " onclick="send_user_login()">Войти</button>
+				<button class="mdl-button mdl-js-button mdl-button--primary" onclick='$("#log-menu").hide();$("#reg-menu").show();' style='float:right'>Зарегистрироваться</button>
+			</div>
+		</div>
+	</div>
+	<!-- Login -->
+
+<!-- Main -->
+<div id="main-menu" style="display:none">
+	<div class="mdl-tabs mdl-js-tabs">
+
+		<div class="mdl-tabs__tab-bar">
+			<a href="#tab1" class="mdl-tabs__tab">Призыв</a>
+			<a href="#tab2" class="mdl-tabs__tab" onclick="find_answers()"><span class="" id="answers_badge" data-badge="">Отклики</span></a>
+			<a href="#tab3" class="mdl-tabs__tab" onclick="find_deal_c()"><span class="" id="deals_badge" data-badge="">Сделки</span></a>
+		</div>
+
+		<div class="mdl-tabs__panel is-active" id="tab1">
+<!-- Главная карточка -->
+			<div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--4dp center" id="main-card">
+				<div class="mdl-card__title">
+					<h1 class="mdl-card__title-text center" id='log'>Призыв рабочих</h1>
+				</div>
+				<div class="mdl-card__supporting-text">
+
+					<div class="left-line">
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<label for="jober" class="mdl-textfield__label"><i class="material-icons">build</i>   Кто вам нужен?</label>
+							<input type="text" class="mdl-textfield__input" id="jober" onclick="toggleJobSelect();"/>
+						</div>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="where_label">
+							<label for="where" class="mdl-textfield__label"><i class="material-icons">location_on</i>   Где вам нужен?</label>
+							<input type="text" class="mdl-textfield__input" id="where" onclick="toggleGeoSelect();geo();"/>
+						</div>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<label for="timer" class="mdl-textfield__label"><i class="material-icons">query_builder</i>   Когда вам нужен?</label>
+							<input type="text" class="mdl-textfield__input" id="timer" />
+						</div>
+
+					</div>
+				</div>
+				<div class="mdl-card__actions mdl-card--border">
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full-btn" onclick="add_ticket()">Вызвать</button>
+				</div>
+			</div>
+<!-- Выбор времени -->
+		<div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--4dp center" id="time-card" style="display:none">
+			<div class="mdl-card__title">
+				<h1 class="mdl-card__title-text center">Выбор времени</h1>
+			</div>
+			<div class="mdl-card__supporting-text">
+
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full-btn" onclick="selectGeo_save()">Сохранить</button>
+				<button class="mdl-button mdl-js-button full-btn" onclick="toggleGeoSelect()">Отменить</button>
+			</div>
+		</div>
+		</div>
+<!-- Вкладка 2 -->
+		<div class="mdl-tabs__panel" id="tab2"> <!-- Вкладка 2 -->
+			<!--<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored add" onclick="find_answers()">
+				<i class="large material-icons">autorenew</i>
+			</button>-->
+			<div class="mdl-grid" id='new_answers'></div>
+
+		</div>
+		<div class="mdl-tabs__panel" id="tab3"><!-- Вкладка 3 -->
+			<!--<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored add" onclick="find_deal_c()">
+				<i class="large material-icons">autorenew</i>
+			</button>-->
+			<div class="mdl-grid" id='deal_u'></div>
+		</div>
+	</div>			
+</div>
+<!-- Main -->
+</div>
+</main>
+</div>
+
+<!--	<link rel="stylesheet" href="../material/material.min.css">
+	<link href="../css/main.css" rel="stylesheet">
+	<script src="../js/jquery-1.12.0.min.js"></script>
+	<script src="../js/AJAX.js"></script>
+	<script src="../js/core.js"></script>
+	<script src="../js/geo.js"></script>
+	<script src="../material/material.min.js"></script>-->
+
+	<!--<link rel="stylesheet" href="http://easywork.su/material/material.min.css">
+	<link href="http://easywork.su/css/main.css" rel="stylesheet">
+	<script src="http://easywork.su/js/core.js"></script>
+
+	<link href="../css/main.css" rel="stylesheet">-->
+
+	<script src="http://easywork.su/js/jquery-1.12.0.min.js"></script>
+	<script src="js/AJAX.js"></script>
+	<script src="http://easywork.su/js/core.js"></script>
+
+	<script src="http://easywork.su/js/geo.js"></script>
+	<script src="http://easywork.su/js/base.js"></script>
+	<script src="http://easywork.su/material/material.min.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.blue_grey-blue.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link href="http://easywork.su/css/main.css" rel="stylesheet">
+
+<script>
+	$(window).load(function(){
+		checkLogin();
+	});
+</script>
+
+<!-- History -->
+<div class="mdl-card mdl-shadow--4dp" id="history_main">
+	<div class="mdl-card__title">
+		<i class="material-icons close" onclick="$('#history_main').hide()">cancel</i>
+	</div>
+	<div id="history">--</div>
+</div>
+<!-- History -->
+
+<!-- Map -->
+<div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--16dp" id="map_main">
+	<div class="mdl-card__title">
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored center" onclick="add_position()">Использовать это место</button>
+		<i class="material-icons close" onclick="$('#map_main').hide()">cancel</i>
+	</div>
+	<div id="mapSurface-old"></div>
+</div>
+<!-- Map -->
+
+<!-- address -->
+<div class="mdl-card mdl-shadow--16dp" id="address_main">
+	<div class="mdl-card__title">
+		<i class="material-icons close" onclick="$('#address_main').hide()">cancel</i>
+		<button class="mdl-button mdl-js-button mdl-button--primary center" onclick='adr=$("#address").val();$("#address_main").hide();'>Использовать этот адрес</button>
+	</div>
+</div>
+<!-- address -->
+
+<!-- Выбор места -->
+<div class="mdl-card mdl-shadow--4dp center full-card-height" id="geo-card" style="display:none">
+	<div class="mdl-card__supporting-text">
+		<div id="address_content">
+			<input placeholder="Введите адрес" type="text" class="mdl-textfield__input" id="address" name="address" size="100"/>
+			<i class="material-icons geo-but" onclick='searchMyGeo();'>gps_fixed</i>
+			<div id="mapSurface"></div>
+
+			<link href="https://cdn.jsdelivr.net/jquery.suggestions/16.2.2/css/suggestions.css" type="text/css" rel="stylesheet" />
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.suggestions/16.2.2/js/jquery.suggestions.min.js"></script>
+			<script type="text/javascript">
+				$("#address").suggestions({
+					serviceUrl: "https://suggestions.dadata.ru/suggestions/api/4_1/rs",
+					token: "17ed65dcbcc11403174b3fb1a72e8af650cf7ae8",
+					type: "ADDRESS",
+					count: 5,
+					onSelect: function(suggestion) {
+						coord = null;
+						coord = '{lat:'+suggestion.data.geo_lat+',lon:'+suggestion.data.geo_lon+'}';
+						position = new google.maps.LatLng(suggestion.data.geo_lat,suggestion.data.geo_lon);
+						adr = $('#address').val();
+						$('#where').val(adr);
+						map.setCenter(position);
+						marker.setPosition(position);
+						myalert("Местоположение отмечено на карте");
+					}
+				});
+			</script>
+		</div>
+	</div>
+	<div class="mdl-card__actions mdl-card--border">
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full-btn" onclick="selectGeo_save()">Использовать этот адрес</button>
+		<button class="mdl-button mdl-js-button full-btn" onclick="toggleGeoSelect()">Отменить</button>
+	</div>
+</div>
+<!-- Выбор места -->
+
+<!-- Выбор рабочего -->
+<div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--4dp center full-card-height" id="job-card" style="display:none">
+	<div class="mdl-card__supporting-text">
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-1">
+			<input type="radio" id="op-1" class="mdl-radio__button"  name="category" value="1">
+			<span class="mdl-radio__label">Маляр</span>
+		</label>
+		<br>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-2">
+			<input type="radio" id="op-2" class="mdl-radio__button" name="category" value="2">
+			<span class="mdl-radio__label">Каменщик</span>
+		</label>
+		<br>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-3">
+			<input type="radio" id="op-3" class="mdl-radio__button" name="category" value="3">
+			<span class="mdl-radio__label">Кирпичи</span>
+		</label>
+		<br>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="op-4">
+			<input type="radio" id="op-4" class="mdl-radio__button" name="category" value="4">
+			<span class="mdl-radio__label">Бетон</span>
+		</label>
+
+	</div>
+	<div class="mdl-card__actions mdl-card--border">
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full-btn" onclick="selectJob_save()">Сохранить</button>
+		<button class="mdl-button mdl-js-button full-btn" onclick="toggleJobSelect()">Отменить</button>
+	</div>
+</div>
+<!-- Выбор рабочего -->
+
+<!-- Update -->
+<div class="mdl-card" id="update_main" style="background-color: #ECEFF1">
+	<div class="mdl-card__title">
+		<i class="material-icons close" onclick="$('#update_main').hide()">cancel</i>
+	</div>
+	<div id="update_details">
+		<div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--4dp center">
+			<div class="mdl-card__title">
+				<h1 class="mdl-card__title-text">Редактирование данных</h1>
+			</div>
+			<div class="mdl-card__supporting-text">
+				<form>
+					<details>
+						<summary>Личная информация</summary>
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<label for="user_surname_up" class="mdl-textfield__label">Фамилия</label>
+							<input type="text" class="mdl-textfield__input" id="user_surname_up" />
+						</div>
+					</details>
+					<details>
+						<summary>Контактная информация</summary>
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<label for="user_phone_up" class="mdl-textfield__label">Телефон</label>
+							<input type="tel" class="mdl-textfield__input" id="user_phone_up" pattern="-?[0-9]*(\.[0-9]+)?"/>
+							<span class="mdl-textfield__error">Номер телефона должен содержать только цифры</span>
+						</div>
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<label for="user_email_up" class="mdl-textfield__label">Почта</label>
+							<input type="email" class="mdl-textfield__input" id="user_email_up" />
+						</div>
+					</details>
+					<details>
+						<summary>Безопасность</summary>
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<label for="user_password_up" class="mdl-textfield__label">Старый пароль</label>
+							<input type="password" class="mdl-textfield__input" id="user_password_up" />
+							<span class="mdl-textfield__error">Некорректный пароль</span>
+						</div>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<label for="user_password_new" class="mdl-textfield__label">Новый пароль</label>
+							<input type="password" class="mdl-textfield__input" id="user_password_new" />
+							<span class="mdl-textfield__error">Некорректный пароль</span>
+						</div>
+
+					</details>
+				</form>
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored " onclick='update_details();'>Обновить</button>
+				<button class="mdl-button mdl-js-button mdl-button--primary" onclick='$("#update_main").hide();' style='float:right'>Отменить</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Update -->
+
+<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button type="button" class="mdl-snackbar__action"></button>
+</div>
+
+</body>
+
