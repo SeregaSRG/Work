@@ -34,7 +34,7 @@ function geo() {
     if (callAddress != null || callPosition != null) {
         currentPosition = new google.maps.LatLng(lat,lon);
         map.setCenter(currentPosition);
-        marker.setPosition(currentPosition);
+        marker.setPosition(currentPosition) ;
     } else {
         geolocationFailure();
     }
