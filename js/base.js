@@ -1,6 +1,5 @@
 var pass_is_correct = false; 
-var ticket_date = 'now';
+var ticket_date = undefined;
 var adr = null;
-var callPosition = null;
-var callAddress = null;
-var default_adr = "Стандартный адресс";
+var callPosition = undefined;
+var callAddress = undefined;

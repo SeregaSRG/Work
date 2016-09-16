@@ -30,8 +30,14 @@ function toggleJobSelect() {
 function saveWorker() {
 	toggleJobSelect();
 	var job_id = $('input[type=radio][name=category]:checked').val();
-	$('#jober').val(whoById(Number(job_id)));
-	$('#who_label').addClass('is-dirty');
+	console.log(job_id);
+	if (job_id!=undefined){
+		$('#jober').val(whoById(Number(job_id)));
+		$('#who_label').addClass('is-dirty');
+	} else {
+		myalert("Выберите категорию")
+	}
+
 }
 
 function toggleGeoSelect() {

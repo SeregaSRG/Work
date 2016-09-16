@@ -109,7 +109,7 @@ function myalert(text) {
 function add_ticket() {
 	$('#loading').toggle();
 	var job_id = $('input[type=radio][name=category]:checked').val();
-	if (job_id != undefined) {
+	if (job_id != undefined && ticket_date != undefined && callAddress != undefined && callPosition != undefined) {
 		$('#loading').show();
 		$.ajax({
 			type: "POST",
@@ -119,8 +119,8 @@ function add_ticket() {
 				'job_id': job_id,
 				'token': window.localStorage.getItem("token"),
 				'date': ticket_date,
-				'address': adr,
-				'coordinates': coord
+				'address': callAddress,
+				'coordinates': callPosition
 			},
 			success: function(response) {
 				if (response.status == "error") {
@@ -137,7 +137,7 @@ function add_ticket() {
 			}
 		});
 	} else {
-		myalert("Выберите категорию");
+		myalert("Заполните все поля");
 	}
 	$('#loading').hide();
 }

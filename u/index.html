@@ -124,12 +124,25 @@
 										<label for="where" class="mdl-textfield__label"><i class="material-icons">location_on</i>   Где вам нужен?</label>
 										<input type="text" class="mdl-textfield__input" id="where" onclick="toggleGeoSelect();geo();"/>
 									</div>
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label time-field">
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="date_label">
 										<label for="output" class="mdl-textfield__label"><i class="material-icons">query_builder</i>   Когда вам нужен?</label>
-										<input type="text" class="mdl-textfield__input" id="output" />
+										<input type="text" class="mdl-textfield__input some_class" id="output" />
 									</div>
+
+									<link rel="stylesheet" type="text/css" href="./jquery.datetimepicker.css"/>
+									<script src="./jquery.js"></script>
+									<script src="build/jquery.datetimepicker.full.js"></script>
+									<script>
+									$.datetimepicker.setLocale('en');
+
+									$('.some_class').datetimepicker({
+										onChangeDateTime:function(dp,$input){
+											$('#date_label').addClass('is-dirty');
+											ticket_date = $input.val();
+										}
+									});
+									</script>
 								</div>
-							</div>
 							<div class="mdl-card__actions mdl-card--border">
 								<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full-btn" onclick="add_ticket()">Вызвать</button>
 							</div>
@@ -175,21 +188,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 <link href="../css/main.css" rel="stylesheet"/>
 
-<link rel="stylesheet" href="../dist/css/datepicker.css">
-<script src="../dist/js/datepicker.standalone.js" charset="utf-8"></script>
-<script>
-
-    const picker = new MaterialDatePicker({})
-            .on('submit', (d) => {
-        output.val = d;
-    });
-
-    const el = document.querySelector('.time-field');
-    el.addEventListener('click', () => {
-        picker.open();
-    }, false);
-
-</script>
 <script>
 	$(window).load(function(){
 		checkLogin();
