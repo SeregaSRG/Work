@@ -36,51 +36,16 @@ function geo() {
         map.setCenter(currentPosition);
         marker.setPosition(currentPosition);
     } else {
-        geolocationFailure();
-    }
-}
-
-function searchMyGeo() {
-    // Пытаемся определить местоположение пользователя
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            geolocationSuccess, geolocationFailure);
-        myalert("Поиск завершен");
-    }
-    else {
-        myalert("Ваш браузер не поддерживает геолокацию");
         goToDefaultLocation();
     }
 }
-function geolocationSuccess(position) {
-    lat = position.coords.latitude;
-    lon = position.coords.longitude;
-    position = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 
-    // Отображаем эту точку на карте
-    map.setCenter(position);
-    marker.setPosition(position);
-    $('#where').val('Отмечено на карте');
-    myalert("Отмечено место на карте");
-}
-
-function geolocationFailure() {
+function goToDefaultLocation() {
     DEFAULT_POSITION = new google.maps.LatLng(lat,lon);
     map.setCenter(DEFAULT_POSITION);
 }
 
-function goToDefaultLocation() {
-    map.setCenter(DEFAULT_POSITION);
-}
-
-function add_position() {
-    adr = null;
-    coord = '{lat:'+lat+',lon:'+lon+'}';
-    //$('#map_main').hide()
-    myalert("Отмечено место на карте");
-}
-
-function savePosition() {
+function savePosition1() {
     toggleGeoSelect();
     if (callAddress == null && callPosition == null) {
         myalert('Адрес не выбран')
@@ -88,24 +53,3 @@ function savePosition() {
         $('#where_label').addClass('is-dirty');
     }
 }
-
-function showMap(data) {
-    //$('#map_main').show();
-    var myOptions = {
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById("mapSurface"), myOptions);
-    position = new google.maps.LatLng(data.lat,data.lon);
-    map.setCenter(position);
-
-    marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        title: 'Место'
-    });
-
-    console.log(data.lon);
-    console.log(data.lat);
-}
-
