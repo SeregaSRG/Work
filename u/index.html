@@ -118,22 +118,22 @@
 								<div class="left-line">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="who_label">
 										<label for="jober" class="mdl-textfield__label"><i class="material-icons">build</i>   Кто вам нужен?</label>
-										<input type="text" class="mdl-textfield__input" id="jober" onclick="toggleJobSelect();"/>
+										<input type="text" class="mdl-textfield__input" readonly id="jober" onclick="toggleJobSelect();"/>
 									</div>
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="where_label">
 										<label for="where" class="mdl-textfield__label"><i class="material-icons">location_on</i>   Где вам нужен?</label>
-										<input type="text" class="mdl-textfield__input" id="where" onclick="toggleGeoSelect();geo();"/>
+										<input type="text" class="mdl-textfield__input" id="where" readonly onclick="toggleGeoSelect();geo();"/>
 									</div>
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="date_label">
 										<label for="output" class="mdl-textfield__label"><i class="material-icons">query_builder</i>   Когда вам нужен?</label>
-										<input type="text" class="mdl-textfield__input some_class" id="output" />
+										<input type="text" class="mdl-textfield__input some_class" readonly id="output" />
 									</div>
 
 									<link rel="stylesheet" type="text/css" href="./jquery.datetimepicker.css"/>
 									<script src="./jquery.js"></script>
 									<script src="build/jquery.datetimepicker.full.js"></script>
 									<script>
-									$.datetimepicker.setLocale('en');
+									$.datetimepicker.setLocale('ru');
 
 									$('.some_class').datetimepicker({
 										onChangeDateTime:function(dp,$input){
@@ -174,6 +174,7 @@
 				</div>
 			</div>
 			<!-- Main -->
+			</div>
 		</div>
 	</main>
 </div>
@@ -245,7 +246,6 @@
                     }
                 });
             </script>
-			<i class="material-icons geo-but" onclick='searchMyGeo();'>gps_fixed</i>
 			<div id="mapSurface"></div>
 		</div>
 	</div>
